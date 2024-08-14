@@ -11,7 +11,7 @@ def get_index_html():
 def analyze_text(text):
     text_to_analyze = text
     analysis_result = emotion_detector(text_to_analyze)
-    return analysis_result
+    return jsonify(result = analysis_result)
 
 if __name__ == "__main__":
     app.run(debug=True)
