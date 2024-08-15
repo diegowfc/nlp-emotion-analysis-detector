@@ -15,6 +15,16 @@ def emotion_detector(text_to_analyze):
     try:
         response = requests.post(url, headers=headers, json=json_payload, verify=False)
         response.raise_for_status()
-        return response.json().get('text', 'No definition found')
+
+        emotions_dict = response.json()
+
+        emotion_scores = {
+        emotion: score
+            for emotion, score in emotions_dict["emotionPredictions"][0]["emotion"].items()
+        }
+
+        emotion_scores['dominant_emotion'] = max(zip(emotion_scores.values(), emotion_scores.keys()))[1]  
+
+        return emotion_scores
     except requests.exceptions.RequestException as e:
         return f"An error occurred: {str(e)}"
