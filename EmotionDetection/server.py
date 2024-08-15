@@ -7,7 +7,7 @@ app = Flask(__name__)
 def get_index_html():
     return render_template('index.html')
 
-@app.route('/analyze/<path:text>')
+@app.route('/emotionDetector/<path:text>')
 def analyze_text(text):
     analysis_result = emotion_detector(text)
     return analysis_result

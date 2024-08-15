@@ -25,6 +25,15 @@ def emotion_detector(text_to_analyze):
 
         emotion_scores['dominant_emotion'] = max(zip(emotion_scores.values(), emotion_scores.keys()))[1]  
 
-        return emotion_scores
+        emotion_statements = []
+
+        for emotion, score in emotion_scores.items():
+            if emotion != "dominant_emotion":
+                emotion_statements.append(f"'{emotion}': {score}")
+
+        concatenated_emotions_value = ", ".join(emotion_statements[:-1]) + f" and {emotion_statements[-1]}"
+        response = f"For the given statement, the system response is {concatenated_emotions_value}. The dominant emotion is {emotion_scores['dominant_emotion']}."
+
+        return response
     except requests.exceptions.RequestException as e:
         return f"An error occurred: {str(e)}"

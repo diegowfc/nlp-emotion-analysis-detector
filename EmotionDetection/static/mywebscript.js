@@ -7,6 +7,6 @@ let RunSentimentAnalysis = ()=>{
             document.getElementById("system_response").innerHTML = xhttp.responseText;
         }
     };
-    xhttp.open("GET", "/analyze/" + encodeURIComponent(textToAnalyze), true);
+    xhttp.open("GET", "/emotionDetector/" + encodeURIComponent(textToAnalyze), true);
     xhttp.send();
 }
