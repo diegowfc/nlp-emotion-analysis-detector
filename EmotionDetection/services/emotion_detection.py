@@ -25,6 +25,6 @@ def emotion_detector(text_to_analyze):
 
         emotion_scores['dominant_emotion'] = max(zip(emotion_scores.values(), emotion_scores.keys()))[1]  
 
-        return emotion_scores
+        return emotion_scores['dominant_emotion']
     except requests.exceptions.RequestException as e:
         return f"An error occurred: {str(e)}"
