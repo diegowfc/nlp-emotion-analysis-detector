@@ -36,4 +36,18 @@ def emotion_detector(text_to_analyze):
 
         return response
     except requests.exceptions.RequestException as e:
-        return f"An error occurred: {str(e)}"
+        if e.response and e.response.status_code == 400:
+            default_emotion_keys = ["anger", "disgust", "fear", "joy", "sadness"]
+            emotions_dict = {
+                "emotionPredictions": [
+                    {
+                        "emotion": {key: None for key in default_emotion_keys},
+                        "dominant_emotion": None
+                    }
+                ]
+            }
+
+            response = "Invalid text! Please try again!"
+            return response
+        
+        return "An unexpected error occurred. Please try again later."
